@@ -27,6 +27,7 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "pg": "^8.23.1",
     "supertest": "^7.1.4"
   }
 }

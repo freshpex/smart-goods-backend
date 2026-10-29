@@ -4,6 +4,8 @@ Small Node.js 24 / Express API for the existing Global Electronic Store. Postgre
 
 ## Local setup
 
+Stock tracking upgrade: run `supabase/migrations/202610290002_product_stock.sql` in the existing database, or run `node --env-file=.env scripts/migrate-stock.js` locally with `DATABASE_URL` configured (requires dev dependencies). Existing stock stays unknown until an admin enters it. `stock_quantity` is optional: blank/null means untracked, zero means out of stock, and 1–5 shows low stock. Quantities are shared across options, validated as nonnegative integers, and updated manually after confirmed sales. Carts and email enquiries do not reserve/decrement stock; this app does not yet process confirmed orders. The storefront refreshes availability every minute, on focus, and on checkout; it blocks enquiries exceeding available stock. Existing supplier listings keep their current behavior.
+
 1. Install Node.js **24 LTS** and run `npm ci` in this folder.
 2. Copy `.env.example` to `.env` if you do not already have one. Set `Postgress_URL`, `Postgress_ANON_KEY` and `Postgress_SERVICE_ROLE_KEY`. Do not overwrite your existing secrets. No custom JWT secret is needed; Postgress verifies and rotates its own tokens.
 3. Run `Postgress/migrations/202610290001_store_admin.sql` in the existing project's Postgress SQL Editor. It adds dedicated product/analytics tables and store-admin fields, retains existing data, and keeps public image downloads available. If `product` or `analytic` already exists with a different schema, review it before applying; `CREATE TABLE IF NOT EXISTS` does not upgrade an unrelated table's columns.

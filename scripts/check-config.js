@@ -5,7 +5,10 @@ try {
   const config = readConfig();
   const { db } = makeClients(config);
   for (const table of [config.SUPABASE_USERS_TABLE, "product", "analytic"]) {
-    const { error } = await db.from(table).select("id").limit(1);
+    const { error } = await db
+      .from(table)
+      .select(table === "product" ? "id,stock_quantity" : "id")
+      .limit(1);
     if (error)
       throw new Error(
         `Cannot access table ${table} (${error.code}). Run the migration/check this project's settings.`,

@@ -5,6 +5,13 @@ export const productSchema = z
     name: z.string().trim().min(1).max(200),
     category: z.string().trim().min(1).max(100),
     price: z.number().finite().min(0).max(100000000),
+    stock_quantity: z
+      .number()
+      .int()
+      .min(0)
+      .max(100000000)
+      .nullable()
+      .default(null),
     description: z.string().trim().max(10000).default(""),
     brand: z.string().trim().max(100).default(""),
     availability: z.string().trim().max(200).default(""),
@@ -69,6 +76,7 @@ export function publicProduct(row) {
     slug: row.slug,
     name: row.name,
     price: Number(row.price),
+    stock_quantity: row.stock_quantity ?? null,
     category: row.category,
     description: row.description || "",
     brand: row.brand || "",
