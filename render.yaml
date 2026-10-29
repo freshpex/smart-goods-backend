@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: smart-goods-backend
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "24.22.2"
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: SUPABASE_STORAGE_BUCKET
+        value: product
+      - key: SUPABASE_USERS_TABLE
+        value: users
+      - key: ANALYTICS_RETENTION_DAYS
+        value: "90"
+      - key: FRONTEND_ORIGINS
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

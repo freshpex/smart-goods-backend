@@ -1,0 +1,32 @@
+{
+  "name": "smart-goods-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env src/server.js",
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test",
+    "admin": "node --env-file-if-exists=.env scripts/admin.js",
+    "check:config": "node --env-file-if-exists=.env scripts/check-config.js",
+    "test:live": "node --env-file-if-exists=.env scripts/smoke.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.80.0",
+    "bowser": "^2.12.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "geoip-lite": "^2.0.3",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "sharp": "^0.35.5",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  }
+}
